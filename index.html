@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102d50">
+<title>ملف الإنجاز الإلكتروني | 18 خطوة</title>
+<style>
+:root{--navy:#15385f;--gold:#d9a12c;--ink:#18283b;--muted:#6b7788;--paper:#fffdf9;--line:#e8e5df}
+*{box-sizing:border-box}body{margin:0;background:#f2f4f7;color:var(--ink);font-family:Tahoma,Arial,sans-serif}
+.hero{background:linear-gradient(125deg,#102d50,#1d4a76);color:white;padding:34px 20px 62px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:250px;height:250px;border:1px solid #ffffff22;border-radius:50%;left:-75px;top:-130px;box-shadow:0 0 0 28px #ffffff0c,0 0 0 58px #ffffff08}
+.wrap{max-width:1180px;margin:auto;padding:0 18px}.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative;z-index:1}
+.badge{background:#d9a12c;color:#fff;padding:9px 16px;border-radius:30px;font-size:13px;font-weight:bold}
+h1{font-size:clamp(25px,4vw,38px);margin:28px 0 10px;position:relative;z-index:1}
+.sub{color:#e3ebf4;line-height:1.9;max-width:780px;margin:0;position:relative;z-index:1}
+main{margin-top:-32px;position:relative;padding-bottom:45px}.panel{background:var(--paper);border:1px solid #ebe7df;border-radius:20px;padding:24px;box-shadow:0 14px 38px #152c4612}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.toolbar h2{font-size:19px;margin:0}.actions{display:flex;gap:9px;flex-wrap:wrap}
+button,.folder{border:0;border-radius:10px;padding:10px 15px;font:inherit;font-size:13px;font-weight:bold;cursor:pointer;text-decoration:none}
+.primary{background:var(--navy);color:white}.secondary{background:#f0f2f5;color:#34465c}
+.grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:13px}
+.card{min-height:112px;border:1.5px solid var(--edge);background:var(--bg);border-radius:15px;padding:14px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;color:var(--ink);cursor:pointer;transition:.18s;position:relative}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 18px #142b4514}
+.num{width:34px;height:34px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:bold}
+.label{font-weight:bold;font-size:14px;line-height:1.55}
+.state{font-size:10px;color:var(--muted);font-weight:normal}
+.card.done .state{color:#16836f}
+.legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:22px;padding-top:17px;border-top:1px solid var(--line);color:#566273;font-size:12px}
+.legend span{display:flex;align-items:center;gap:7px}.dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+.note{font-size:12px;color:var(--muted);line-height:1.8;margin:16px 0 0}
+footer{text-align:center;color:#8a94a1;font-size:11px;padding:0 12px 25px}
+.modal{display:none;position:fixed;inset:0;background:#101c2dcc;z-index:5;align-items:center;justify-content:center;padding:16px}
+.modal.show{display:flex}.box{background:white;border-radius:18px;padding:22px;width:min(100%,560px);max-height:90vh;overflow:auto}
+.box h3{margin:0 0 8px}.box p{color:var(--muted);font-size:13px;line-height:1.7}
+.field{display:block;margin:15px 0}.field span{display:block;font-size:13px;font-weight:bold;margin-bottom:7px}
+input{width:100%;padding:12px;border:1px solid #d9dee6;border-radius:9px;font:inherit;direction:ltr;text-align:left}
+.row{display:flex;gap:9px;justify-content:flex-start;flex-wrap:wrap;margin-top:18px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:520px){.hero{padding:25px 0 54px}.panel{padding:16px 12px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.card{min-height:108px}.toolbar h2{font-size:16px}.topline .badge{font-size:11px}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+ <div class="topline"><span class="badge">ملف الإنجاز الإلكتروني</span><a class="badge" id="folderTop" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/13kx31EIcwENeynl1MDcgMxgv-3Eui0w5" style="text-decoration:none">📁 فتح مجلد Drive</a></div>
+ <h1>رحلتي نحو المعلم المحترف</h1>
+ <p class="sub">ملف إنجازك في 18 خطوة تفاعلية؛ اختر أي خطوة للوصول إلى ملفها على Google Drive. يمكنك إضافة روابط الملفات كلما جهزتها.</p>
+</div></header>
+<main class="wrap"><section class="panel">
+ <div class="toolbar"><h2>محطات ملف الإنجاز</h2><div class="actions">
+  <button class="secondary" id="folderBtn">📁 مجلد الملفات</button>
+  <button class="primary" id="editBtn">⚙️ إضافة / تعديل الروابط</button>
+ </div></div>
+ <div class="grid" id="grid"></div>
+ <div class="legend">
+  <span><i class="dot" style="background:#15385f"></i> الأسس (1–4)</span>
+  <span><i class="dot" style="background:#cc304b"></i> مهارات التنفيذ (5–12)</span>
+  <span><i class="dot" style="background:#208c7d"></i> إدارة الموقف (13–14)</span>
+  <span><i class="dot" style="background:#7653a0"></i> من المعمل إلى الفصل (15–18)</span>
+ </div>
+ <p class="note">ملاحظة: المربعات جاهزة الآن، والروابط غير المضافة ستظل في حالة «بانتظار الرابط». عند إنشاء كل ملف على Drive، اضغط «إضافة / تعديل الروابط» والصق رابط المشاركة الخاص به. تُحفظ الروابط على هذا المتصفح والجهاز.</p>
+</section></main>
+<footer>ملف الإنجاز الإلكتروني · تصميم تفاعلي قابل للتحديث</footer>
+<div class="modal" id="modal"><div class="box">
+ <h3>إدارة روابط الملفات</h3><p>اختر رقم الخطوة، ثم الصق رابط ملف Google Drive. تأكد أن صلاحية الملف تسمح لك بفتحه من الحساب المستخدم.</p>
+ <label class="field"><span>الخطوة</span><select id="which" style="width:100%;padding:12px;border:1px solid #d9dee6;border-radius:9px;font:inherit"></select></label>
+ <label class="field"><span>رابط الملف</span><input id="url" type="url" placeholder="https://drive.google.com/file/d/..."></label>
+ <div class="row"><button class="primary" id="save">حفظ الرابط</button><button class="secondary" id="clear">مسح الرابط</button><button class="secondary" id="close">إغلاق</button></div>
+</div></div>
+<script>
+const folder='https://drive.google.com/drive/folders/13kx31EIcwENeynl1MDcgMxgv-3Eui0w5';
+const items=[
+'فتح الملف ودرس الأساس','خريطة مهاراتي','أدوات الملاحظة','خطتي الأولى',
+'التهيئة','الشرح','الأسئلة الصفية','تنويع المثيرات','التعزيز','السبورة والوسائل',
+'الحضور الصفي','الغلق','إدارة الفصل','العمل في مجموعات','المراجعة التأملية',
+'التدريس الرقمي','مهارة تخصصي','الدرس المتكامل وخطة النمو'
+];
+const groups=[
+{a:'#15385f',b:'#eef3fa'},{a:'#15385f',b:'#eef3fa'},{a:'#15385f',b:'#eef3fa'},{a:'#15385f',b:'#eef3fa'},
+...Array(8).fill({a:'#cc304b',b:'#fff0f2'}),
+...Array(2).fill({a:'#208c7d',b:'#edf8f5'}),
+...Array(4).fill({a:'#7653a0',b:'#f4f0f8'})
+];
+let links=JSON.parse(localStorage.getItem('portfolio18_links')||'{}');
+const grid=document.getElementById('grid'),which=document.getElementById('which'),url=document.getElementById('url'),modal=document.getElementById('modal');
+items.forEach((name,i)=>{let o=document.createElement('option');o.value=i+1;o.textContent=`${i+1} - ${name}`;which.append(o)});
+function render(){grid.innerHTML='';items.forEach((name,i)=>{const n=i+1,link=links[n];const c=document.createElement('button');c.className='card '+(link?'done':'');c.style.setProperty('--accent',groups[i].a);c.style.setProperty('--bg',groups[i].b);c.style.setProperty('--edge',groups[i].a+'66');c.innerHTML=`<span class="num">${n}</span><span class="label">${name}</span><span class="state">${link?'✓ الرابط مضاف':'بانتظار الرابط'}</span>`;c.addEventListener('click',()=>{if(link){window.open(link,'_blank','noopener')}else{which.value=n;url.value='';modal.classList.add('show')}});grid.append(c)})}
+function openEditor(){which.value='1';url.value=links['1']||'';modal.classList.add('show')}
+which.addEventListener('change',()=>url.value=links[which.value]||'');
+document.getElementById('editBtn').onclick=openEditor;
+document.getElementById('folderBtn').onclick=()=>window.open(folder,'_blank','noopener');
+document.getElementById('close').onclick=()=>modal.classList.remove('show');
+document.getElementById('save').onclick=()=>{const n=which.value,v=url.value.trim();if(!v){alert('الصق رابط الملف أولاً.');return}if(!/^https:\/\/(drive\.google\.com|docs\.google\.com)\//i.test(v)){alert('من فضلك استخدم رابط Google Drive أو Google Docs.');return}links[n]=v;localStorage.setItem('portfolio18_links',JSON.stringify(links));render();modal.classList.remove('show')};
+document.getElementById('clear').onclick=()=>{delete links[which.value];localStorage.setItem('portfolio18_links',JSON.stringify(links));url.value='';render()};
+modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('show')});
+render();
+</script>
+</body></html>
